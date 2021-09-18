@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+RIM-COD-Module-Name: FaceDetection
+RIM-COD-Module-Dependencies: net_rim_cldc
+MIDlet-Jar-Size: 13359
+MIDlet-1: Face Detector,,MediaMIDlet
+RIM-COD-Creation-Time: 1226987714
+MIDlet-Jar-URL: FaceDetection.jar
+RIM-COD-URL: FaceDetection.cod
+RIM-COD-SHA1: 84 94 dc f7 fe ec 19 5c 2d fd 41 42 73 a9 65 0f 01 be 7b 92
+RIM-COD-Size: 7132
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 0.8b
+MIDlet-Name: FaceDetection
+MIDlet-Description: Mobile Application for automatic face detection in Images
+MIDlet-Vendor: andresmtz@gmail.com
+MicroEdition-Profile: MIDP-2.0
+RIM-MIDlet-Flags-1: 0

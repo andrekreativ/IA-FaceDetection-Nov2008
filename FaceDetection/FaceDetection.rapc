@@ -1,0 +1,10 @@
+MIDlet-Name: FaceDetection
+MIDlet-Version: 0.8b
+MIDlet-Vendor: andresmtz@gmail.com
+MIDlet-Description: Mobile Application for automatic face detection in Images
+MIDlet-Jar-URL: FaceDetection.jar
+MIDlet-Jar-Size: 0
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: Face Detector,,
+RIM-MIDlet-Flags-1: 0

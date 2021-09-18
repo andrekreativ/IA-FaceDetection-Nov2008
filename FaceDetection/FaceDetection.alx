@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="FaceDetection">
+		<name >
+			Face Detector
+		</name>
+		<description >
+			Mobile Application for automatic face detection in Images
+		</description>
+		<version >
+			0.8b
+		</version>
+		<vendor >
+			andresmtz@gmail.com
+		</vendor>
+		<copyright >
+			Copyright (c) 2008 andresmtz@gmail.com
+		</copyright>
+		<fileset Java="1.33">
+			<directory >
+				
+			</directory>
+			<files >
+				FaceDetection.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
