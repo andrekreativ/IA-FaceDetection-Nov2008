@@ -56,46 +56,49 @@ These specs illustrate the highly limited computational and memory environment a
 
 ## Summary of Algorithm & Innovation
 
-At the time (2008), most face detection techniques (e.g., Viola–Jones with Haar cascades) were too resource-intensive to run on mobile hardware like the BlackBerry Pearl. These traditional methods required desktop-class CPUs and far more memory than was available on consumer devices.  
+At the time (2008), most face detection techniques (e.g., Viola–Jones Haar cascades) were too computationally heavy for mobile devices. They required desktop-class CPUs and far more memory than what the **BlackBerry Pearl** offered (312 MHz ARM CPU, 32 MB RAM).  
 
-To overcome this, I designed a lightweight **color-based face detection algorithm** that was optimized for limited CPU and memory, yet still capable of detecting faces in **sub-second time** on the Pearl.
+To make on-device face detection possible, I designed a **lightweight hybrid algorithm** that combined color-based filtering with unsupervised clustering. This approach was tailored to run in **sub-second time** while consuming minimal CPU and memory.
 
-Key innovations included:
+### Core Innovations
 
-1. **Downscaling for efficiency**  
-   Images were resized to a manageable width (≈100px) to dramatically reduce the number of pixels processed, while still preserving enough structure for detection.
+1. **Aggressive Downscaling**  
+   Images were reduced to ~100 px width, preserving overall structure while drastically reducing the number of pixels to process.
 
-2. **Skin color filtering**  
-   Each pixel was analyzed using a custom **skin-color classifier** (via RGB thresholds and transformations). Non-skin pixels were discarded immediately, cutting down the search space and memory usage.
+2. **Multi-Rule Skin Detection**  
+   - **RGB rule** (Peer–Kovac–Solina, 2003) to identify natural skin-tone thresholds.  
+   - **YCrCb rule** (Chai–Ngan) to exploit chrominance values, using a lightweight RGB→YCrCb conversion tuned for speed.  
+   - **RGB2 heuristic** (r > g > b, g > b) as a fallback rule for ultra-fast checks.  
+   These rules acted as a **pre-filter**, discarding non-skin pixels early and shrinking the candidate search space.
 
-3. **K-Means clustering of skin regions**  
-   Remaining skin-color pixels were clustered using **K-Means** to group potential face regions. This allowed the algorithm to identify candidate face regions without scanning the entire image.
+3. **Spatial K-Means Clustering**  
+   Remaining skin pixels were clustered based on their **(x, y) positions**, not color. With K=3, this produced contiguous “blobs” of skin-like regions—potential faces.
 
-4. **Hierarchical refinement with sub-clusters**  
-   To improve accuracy, each cluster was further segmented into sub-clusters (SUB_K), helping separate actual face regions from noise (e.g., background skin-tone pixels).
+4. **Hierarchical Refinement**  
+   Each cluster was further segmented into **sub-clusters (SUB_K)** to isolate actual faces from noise (e.g., background with similar tones).
 
-5. **Lightweight visualization & debugging**  
-   Intermediate results (skin masks, clusters) were stored and visualized as debug PNGs, enabling rapid testing on device while keeping the implementation minimal.
+5. **On-Device Debugging Pipeline**  
+   Intermediate results (skin masks, clustered images) were drawn into **bitmap overlays** and saved as PNGs, enabling visual feedback directly on device without heavy tooling.
 
 ---
 
-### Algorithm Flow
+## Algorithm Flow
 
 ```mermaid
 flowchart TD
     A[Input image] --> B[Downscale to approx 100 px width]
-    B --> C[Skin color filter]
-    C --> D[Remove non skin pixels]
-    D --> E[KMeans clustering of skin pixels]
-    E --> F[Sub cluster refinement]
+    B --> C[Apply skin color rules: RGB, YCrCb, RGB2]
+    C --> D[Remove non-skin pixels]
+    D --> E[K-Means clustering on skin pixels]
+    E --> F[Sub-cluster refinement]
     F --> G[Identify candidate face regions]
-    G --> H[Output highlight faces]
+    G --> H[Output: highlight faces / debug overlays]
 ```
 
 ### Why This Was Novel in 2008
-- Running **any kind of real-time face detection** on a mobile device was rare at the time.  
-- The BlackBerry Pearl had only **312 MHz CPU** and **32 MB RAM**, with no GPU acceleration.  
-- By combining **color filtering + clustering**, this approach avoided heavy Haar classifiers or neural networks, achieving **sub-second detection** on early mobile hardware.  
-- This made it one of the earliest demonstrations of practical **on-device face detection** for consumer phones.
+- **On-device face detection was almost unheard of**. Mobile AI was in its infancy; even basic image processing was considered heavy.
+- The **BlackBerry Pearl** had no GPU acceleration, only a 312 MHz ARM CPU and 32 MB RAM, making real-time detection a huge technical challenge.
+- By combining **color filtering + lightweight clustering**, this approach sidestepped heavy statistical classifiers or neural nets, enabling **sub-second detection** on a constrained mobile device.
+- It represents one of the earliest demonstrations of **real-time face detection on consumer phones**, paving the way for later mobile AI applications.
 
 
