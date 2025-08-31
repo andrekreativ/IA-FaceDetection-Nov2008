@@ -54,8 +54,35 @@ These specs illustrate the highly limited computational and memory environment a
 
 ---
 
-## Summary
+## Summary of Algorithm & Innovation
 
-Faced with significant hardware limitations of early BlackBerry Pearl models—particularly limited CPU speed, RAM, and absence of Wi-Fi—we bypassed traditional resource-heavy face detection techniques. Instead, we devised and implemented a novel, lean algorithm that detects faces extremely quickly (sub-second), making it practical for the handheld constraints of the time.
+At the time (2008), most face detection techniques (e.g., Viola–Jones with Haar cascades) were too resource-intensive to run on mobile hardware like the BlackBerry Pearl. These traditional methods required desktop-class CPUs and far more memory than was available on consumer devices.  
+
+To overcome this, I designed a lightweight **color-based face detection algorithm** that was optimized for limited CPU and memory, yet still capable of detecting faces in **sub-second time** on the Pearl.
+
+Key innovations included:
+
+1. **Downscaling for efficiency**  
+   Images were resized to a manageable width (≈100px) to dramatically reduce the number of pixels processed, while still preserving enough structure for detection.
+
+2. **Skin color filtering**  
+   Each pixel was analyzed using a custom **skin-color classifier** (via RGB thresholds and transformations). Non-skin pixels were discarded immediately, cutting down the search space and memory usage.
+
+3. **K-Means clustering of skin regions**  
+   Remaining skin-color pixels were clustered using **K-Means** to group potential face regions. This allowed the algorithm to identify candidate face regions without scanning the entire image.
+
+4. **Hierarchical refinement with sub-clusters**  
+   To improve accuracy, each cluster was further segmented into sub-clusters (SUB_K), helping separate actual face regions from noise (e.g., background skin-tone pixels).
+
+5. **Lightweight visualization & debugging**  
+   Intermediate results (skin masks, clusters) were stored and visualized as debug PNGs, enabling rapid testing on device while keeping the implementation minimal.
+
+---
+
+### Why This Was Novel in 2008
+- Running **any kind of real-time face detection** on a mobile device was rare at the time.  
+- The BlackBerry Pearl had only **312 MHz CPU** and **32 MB RAM**, with no GPU acceleration.  
+- By combining **color filtering + clustering**, this approach avoided heavy Haar classifiers or neural networks, achieving **sub-second detection** on early mobile hardware.  
+- This made it one of the earliest demonstrations of practical **on-device face detection** for consumer phones.
 
 
