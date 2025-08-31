@@ -22,10 +22,10 @@ Traditional algorithms requiring extensive processing power and memory—as foun
 - **RAM:** 32 MB (some models up to 64 MB)  
 - **Storage:** 64 MB internal + microSD expansion  
 - **Screen:** ~2.2" TFT LCD, 240×260 px resolution (~161 ppi), 65K colors  
-- **Camera:** 1.3 MP (8100) or 2.0 MP (8110/8120 models) with LED flash :contentReference[oaicite:1]{index=1}  
-- **Battery:** ~900 mAh (Li-Ion), ~3.5 h talk time / ~360 h standby :contentReference[oaicite:2]{index=2}  
-- **Connectivity:** Bluetooth 2.0; no Wi-Fi (in earliest models) :contentReference[oaicite:3]{index=3}  
-- **Weight & Size:** ~90 g, 107 × 50 × 14 mm :contentReference[oaicite:4]{index=4}  
+- **Camera:** 1.3 MP (8100) or 2.0 MP (8110/8120 models) with LED flash
+- **Battery:** ~900 mAh (Li-Ion), ~3.5 h talk time / ~360 h standby
+- **Connectivity:** Bluetooth 2.0; no Wi-Fi (in earliest models) 
+- **Weight & Size:** ~90 g, 107 × 50 × 14 mm  
 
 These specs illustrate the highly limited computational and memory environment available at the time, which is why existing desktop-class face detection methods were not feasible.
 
