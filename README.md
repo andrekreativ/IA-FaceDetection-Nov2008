@@ -79,6 +79,19 @@ Key innovations included:
 
 ---
 
+### Algorithm Flow
+
+```mermaid
+flowchart TD
+    A[Input image] --> B[Downscale to approx 100 px width]
+    B --> C[Skin color filter]
+    C --> D[Remove non skin pixels]
+    D --> E[KMeans clustering of skin pixels]
+    E --> F[Sub cluster refinement]
+    F --> G[Identify candidate face regions]
+    G --> H[Output highlight faces]
+```
+
 ### Why This Was Novel in 2008
 - Running **any kind of real-time face detection** on a mobile device was rare at the time.  
 - The BlackBerry Pearl had only **312 MHz CPU** and **32 MB RAM**, with no GPU acceleration.  
